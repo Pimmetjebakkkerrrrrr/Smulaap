@@ -384,4 +384,38 @@ footer {
     color: #777;
     margin-bottom: 5px;
 }
+/* ==========================================
+   EXTRA STYLING VOOR DE NIEUWSFOTO
+   ========================================== */
+.news-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.news-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.news-content {
+    flex: 1;
+}
+
+/* Zorg dat op mobiel de foto boven de tekst komt */
+@media (max-width: 600px) {
+    .news-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .news-image {
+        width: 100%;
+        height: auto;
+    }
+}
+
 
