@@ -27,10 +27,13 @@
 
     <!-- Reserveringsformulier -->
     <main class="reservation-section">
-        <h1>Kom Gezellig Smullen!</h1>
-        <p>Vul het onderstaande formulier in om een tafel te reserveren.</p>
+        
+        <!-- Deze koptekst verdwijnt nu ook na het reserveren -->
+        <div id="formulierKop">
+            <h1>Kom Gezellig Smullen!</h1>
+            <p>Vul het onderstaande formulier in om een tafel te reserveren.</p>
+        </div>
 
-        <!-- ID toegevoegd voor JavaScript en actie teruggezet naar jouw basisversie -->
         <form id="reserveringsFormulier" action="https://formspree.io" method="POST">
             
             <div class="form-group">
@@ -82,7 +85,7 @@
             <button type="submit" class="submit-btn">Reserveer Mijn Tafel</button>
         </form>
 
-        <!-- Dit is de succesbox die direct verschijnt na het klikken -->
+        <!-- Succesbox -->
         <div id="succesBericht" style="display: none; margin-top: 20px; padding: 20px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center; font-size: 1.2rem; font-weight: bold;">
             <p id="berichtTekst"></p>
         </div>
@@ -109,28 +112,26 @@
         </div>
     </footer>
 
-    <!-- Het herstelde en vereenvoudigde JavaScript-gedeelte -->
+    <!-- JavaScript die ook de koptekst verbergt -->
     <script>
         document.getElementById('reserveringsFormulier').addEventListener('submit', function(event) {
-            // Stop het herladen van de pagina
             event.preventDefault();
 
-            // Haal de ingevulde datum en tijd op
             const gekozenDatum = document.getElementById('date').value;
             const gekozenTijd = document.getElementById('time').value;
 
-            // Formatteer de datum netjes naar DD-MM-YYYY (bijv. 2026-06-19 wordt 19-06-2026)
             const datumDelen = gekozenDatum.split('-');
             const geformatteerdeDatum = datumDelen[2] + '-' + datumDelen[1] + '-' + datumDelen[0];
 
-            // Bouw de succes-tekst exact zoals je vroeg
             const succesTekst = `Gereserveerd kom om ${geformatteerdeDatum} om ${gekozenTijd} uur bij ons langs!`;
             
-            // Toon het bericht in de groene box
             document.getElementById('berichtTekst').innerText = succesTekst;
             
-            // Verberg het formulier en laat de succesbox zien
+            // Verberg het formulier EN de koptekst
+            document.getElementById('formulierKop').style.display = 'none';
             document.getElementById('reserveringsFormulier').style.display = 'none';
+            
+            // Toon de succesbox
             document.getElementById('succesBericht').style.display = 'block';
         });
     </script>
