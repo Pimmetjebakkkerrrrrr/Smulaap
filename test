@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tafel Reserveren | De Smulaap</title>
+    <!-- Koppeling naar het losse CSS bestand -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
 
+    <!-- Navigatiebalk -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">🍴 De Smulaap</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menukaart</a></li>
+                    <li><a href="reserveren.html">Reserveren</a></li>
+                    <li><a href="info.html">Info & Nieuws</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Reserveringsformulier -->
+    <main class="reservation-section">
+        <h1>Kom Gezellig Smullen!</h1>
+        <p>Vul het onderstaande formulier in om een tafel te reserveren.</p>
+
+        <form action="https://formspree.io" method="POST">
+            
+            <div class="form-group">
+                <label for="name">Naam:</label>
+                <input type="text" id="name" name="naam" placeholder="Jouw volledige naam" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mailadres:</label>
+                <input type="email" id="email" name="email" placeholder="voorbeeld@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Datum:</label>
+                <input type="date" id="date" name="datum" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Tijdstip:</label>
+                <select id="time" name="tijd" required>
+                    <option value="" disabled selected>Kies een tijdstip</option>
+                    <option value="16:00">16:00 uur</option>
+                    <option value="17:00">17:00 uur</option>
+                    <option value="18:00">18:00 uur</option>
+                    <option value="19:00">19:00 uur</option>
+                    <option value="20:00">20:00 uur</option>
+                    <option value="21:00">21:00 uur</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">Aantal personen:</label>
+                <select id="guests" name="personen" required>
+                    <option value="" disabled selected>Kies aantal personen</option>
+                    <option value="1">1 persoon</option>
+                    <option value="2">2 personen</option>
+                    <option value="3">3 personen</option>
+                    <option value="4">4 personen</option>
+                    <option value="5">5 personen</option>
+                    <option value="6+">Meer dan 5 personen</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Bijzonderheden of allergieën (optioneel):</label>
+                <textarea id="comments" name="opmerkingen" rows="4" placeholder="Bijv. kinderstoel gewenst of glutenvrij dieet..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Reserveer Mijn Tafel</button>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-box">
+                <h3>Ons Adres</h3>
+                <p>Hubelebubeluweg 548,3</p>
+                <p>1001 AC Piepelaveen</p>
+            </div>
+            <div class="footer-box">
+                <h3>Openingstijden</h3>
+                <p>Maandag: Gesloten</p>
+                <p>Dinsdag t/m Donderdag: 16:00 - 22:00</p>
+                <p>Vrijdag & Zaterdag: 12:00 - 23:00</p>
+                <p>Zondag: 12:00 - 21:00</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Restaurant De Smulaap - Schoolproject</p>
+        </div>
+    </footer>
+
+</body>
+</html>
