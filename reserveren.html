@@ -3,73 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserveren - Smulaap</title>
+    <title>Tafel Reserveren | De Smulaap</title>
+    <!-- Koppeling naar het losse CSS bestand -->
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
 
-    <!-- Jouw navigatiemenu (pas dit aan naar je eigen menu) -->
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="reserveren.html">Reserveren</a>
-        <a href="info.html">Info</a>
-    </nav>
+    <!-- Navigatiebalk -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">🍴 De Smulaap</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menukaart</a></li>
+                    <li><a href="reserveren.html">Reserveren</a></li>
+                    <li><a href="info.html">Info & Nieuws</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <main style="padding: 20px; max-width: 500px; margin: 0 auto;">
-        <h2>Tafeltje reserveren bij Smulaap</h2>
-        
-        <!-- Het Reserveringsformulier -->
-        <form id="reservationForm">
-            <div style="margin-bottom: 15px;">
-                <label for="name">Naam:</label><br>
-                <input type="text" id="name" required style="width: 100%; padding: 8px;">
+    <!-- Reserveringsformulier -->
+    <main class="reservation-section">
+        <h1>Kom Gezellig Smullen!</h1>
+        <p>Vul het onderstaande formulier in om een tafel te reserveren.</p>
+
+        <!-- ID toegevoegd aan het formulier zodat JavaScript ermee kan werken -->
+        <!-- Let op: Vervang {JOUW_FORMSPREE_ID} door jouw unieke code van Formspree! -->
+        <form id="reserveringsFormulier" action="https://formspree.io{JOUW_FORMSPREE_ID}" method="POST">
+            
+            <div class="form-group">
+                <label for="name">Naam:</label>
+                <input type="text" id="name" name="naam" placeholder="Jouw volledige naam" required>
             </div>
 
-            <div style="margin-bottom: 15px;">
-                <label for="date">Datum:</label><br>
-                <input type="date" id="date" required style="width: 100%; padding: 8px;">
+            <div class="form-group">
+                <label for="email">E-mailadres:</label>
+                <input type="email" id="email" name="email" placeholder="voorbeeld@email.com" required>
             </div>
 
-            <div style="margin-bottom: 15px;">
-                <label for="time">Tijd:</label><br>
-                <input type="time" id="time" required style="width: 100%; padding: 8px;">
+            <div class="form-group">
+                <label for="date">Datum:</label>
+                <input type="date" id="date" name="datum" required>
             </div>
 
-            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
-                Reserveren
-            </button>
+            <div class="form-group">
+                <label for="time">Tijdstip:</label>
+                <select id="time" name="tijd" required>
+                    <option value="" disabled selected>Kies een tijdstip</option>
+                    <option value="16:00">16:00 uur</option>
+                    <option value="17:00">17:00 uur</option>
+                    <option value="18:00">18:00 uur</option>
+                    <option value="19:00">19:00 uur</option>
+                    <option value="20:00">20:00 uur</option>
+                    <option value="21:00">21:00 uur</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">Aantal personen:</label>
+                <select id="guests" name="personen" required>
+                    <option value="" disabled selected>Kies aantal personen</option>
+                    <option value="1">1 persoon</option>
+                    <option value="2">2 personen</option>
+                    <option value="3">3 personen</option>
+                    <option value="4">4 personen</option>
+                    <option value="5">5 personen</option>
+                    <option value="6+">Meer dan 5 personen</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Bijzonderheden of allergieën (optioneel):</label>
+                <textarea id="comments" name="opmerkingen" rows="4" placeholder="Bijv. kinderstoel gewenst of glutenvrij dieet..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Reserveer Mijn Tafel</button>
         </form>
 
-        <!-- Het succesbericht (is standaard onzichtbaar) -->
-        <div id="successMessage" style="display: none; margin-top: 20px; padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px;">
-            <p id="messageText"></p>
+        <!-- Dit is de nieuwe succesbox die verschijnt na het reserveren -->
+        <div id="succesBericht" style="display: none; margin-top: 20px; padding: 20px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center; font-size: 1.2rem;">
+            <p id="berichtTekst"></p>
         </div>
     </main>
 
-    <!-- Het JavaScript-gedeelte dat de magie doet -->
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-box">
+                <h3>Ons Adres</h3>
+                <p>Hubelebubeluweg 548,3</p>
+                <p>1001 AC Piepelaveen</p>
+            </div>
+            <div class="footer-box">
+                <h3>Openingstijden</h3>
+                <p>Maandag: Gesloten</p>
+                <p>Dinsdag t/m Donderdag: 16:00 - 22:00</p>
+                <p>Vrijdag & Zaterdag: 12:00 - 23:00</p>
+                <p>Zondag: 12:00 - 21:00</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Restaurant De Smulaap - Schoolproject</p>
+        </div>
+    </footer>
+
+    <!-- Het JavaScript-gedeelte voor de werking -->
     <script>
-        document.getElementById('reservationForm').addEventListener('submit', function(event) {
-            // Voorkom dat de pagina herlaadt na het klikken op de knop
+        document.getElementById('reserveringsFormulier').addEventListener('submit', function(event) {
+            // Voorkom dat de pagina direct herlaadt of ververst
             event.preventDefault();
 
-            // Haal de ingevulde datum en tijd op uit de invoervelden
-            const inputDate = document.getElementById('date').value;
-            const inputTime = document.getElementById('time').value;
+            const formulier = this;
+            const data = new FormData(formulier);
 
-            // Formatteer de datum naar een nettere Nederlandse weergave (DD-MM-YYYY)
-            const parts = inputDate.split('-');
-            const formattedDate = parts[2] + '-' + parts[1] + '-' + parts[0];
+            // Haal de gekozen datum en tijd op uit de invoervelden
+            const gekozenDatum = document.getElementById('date').value;
+            const gekozenTijd = document.getElementById('time').value;
 
-            // Maak de tekst voor het succesbericht
-            const outputMessage = `Gereserveerd! Kom om ${formattedDate} om ${inputTime} uur bij ons langs!`;
+            // Formatteer de datum van YYYY-MM-DD naar DD-MM-YYYY voor Nederlandse weergave
+            const datumDelen = gekozenDatum.split('-');
+            const geformatteerdeDatum = `${datumDelen[2]}-${datumDelen[1]}-${datumDelen[0]}`;
 
-            // Zet de tekst in het berichtvenster
-            document.getElementById('messageText').innerText = outputMessage;
-
-            // Maak het formulier onzichtbaar en toon het succesbericht
-            document.getElementById('reservationForm').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
+            // Stuur de gegevens stilletjes op de achtergrond naar Formspree
+            fetch(formulier.action, {
+                method: formulier.method,
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Maak de tekst met de juiste datum en gekozen tijdstip
+                    const succesTekst = `Gereserveerd kom om ${geformatteerdeDatum} om ${gekozenTijd} bij ons langs!`;
+                    
+                    // Toon het bericht en verberg het formulier
+                    document.getElementById('berichtTekst').innerText = succesTekst;
+                    formulier.style.display = 'none';
+                    document.getElementById('succesBericht').style.display = 'block';
+                } else {
+                    alert("Er ging iets mis bij het verzenden. Probeer het nog eens.");
+                }
+            }).catch(error => {
+                alert("Er is een netwerkfout opgetreden. Probeer het later opnieuw.");
+            });
         });
     </script>
 
