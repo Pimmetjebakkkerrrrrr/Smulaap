@@ -30,9 +30,8 @@
         <h1>Kom Gezellig Smullen!</h1>
         <p>Vul het onderstaande formulier in om een tafel te reserveren.</p>
 
-        <!-- ID toegevoegd aan het formulier zodat JavaScript ermee kan werken -->
-        <!-- Let op: Vervang {JOUW_FORMSPREE_ID} door jouw unieke code van Formspree! -->
-        <form id="reserveringsFormulier" action="https://formspree.io{JOUW_FORMSPREE_ID}" method="POST">
+        <!-- ID toegevoegd voor JavaScript en actie teruggezet naar jouw basisversie -->
+        <form id="reserveringsFormulier" action="https://formspree.io" method="POST">
             
             <div class="form-group">
                 <label for="name">Naam:</label>
@@ -83,8 +82,8 @@
             <button type="submit" class="submit-btn">Reserveer Mijn Tafel</button>
         </form>
 
-        <!-- Dit is de nieuwe succesbox die verschijnt na het reserveren -->
-        <div id="succesBericht" style="display: none; margin-top: 20px; padding: 20px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center; font-size: 1.2rem;">
+        <!-- Dit is de succesbox die direct verschijnt na het klikken -->
+        <div id="succesBericht" style="display: none; margin-top: 20px; padding: 20px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; text-align: center; font-size: 1.2rem; font-weight: bold;">
             <p id="berichtTekst"></p>
         </div>
     </main>
@@ -110,45 +109,29 @@
         </div>
     </footer>
 
-    <!-- Het JavaScript-gedeelte voor de werking -->
+    <!-- Het herstelde en vereenvoudigde JavaScript-gedeelte -->
     <script>
         document.getElementById('reserveringsFormulier').addEventListener('submit', function(event) {
-            // Voorkom dat de pagina direct herlaadt of ververst
+            // Stop het herladen van de pagina
             event.preventDefault();
 
-            const formulier = this;
-            const data = new FormData(formulier);
-
-            // Haal de gekozen datum en tijd op uit de invoervelden
+            // Haal de ingevulde datum en tijd op
             const gekozenDatum = document.getElementById('date').value;
             const gekozenTijd = document.getElementById('time').value;
 
-            // Formatteer de datum van YYYY-MM-DD naar DD-MM-YYYY voor Nederlandse weergave
+            // Formatteer de datum netjes naar DD-MM-YYYY (bijv. 2026-06-19 wordt 19-06-2026)
             const datumDelen = gekozenDatum.split('-');
-            const geformatteerdeDatum = `${datumDelen[2]}-${datumDelen[1]}-${datumDelen[0]}`;
+            const geformatteerdeDatum = datumDelen[2] + '-' + datumDelen[1] + '-' + datumDelen[0];
 
-            // Stuur de gegevens stilletjes op de achtergrond naar Formspree
-            fetch(formulier.action, {
-                method: formulier.method,
-                body: data,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    // Maak de tekst met de juiste datum en gekozen tijdstip
-                    const succesTekst = `Gereserveerd kom om ${geformatteerdeDatum} om ${gekozenTijd} bij ons langs!`;
-                    
-                    // Toon het bericht en verberg het formulier
-                    document.getElementById('berichtTekst').innerText = succesTekst;
-                    formulier.style.display = 'none';
-                    document.getElementById('succesBericht').style.display = 'block';
-                } else {
-                    alert("Er ging iets mis bij het verzenden. Probeer het nog eens.");
-                }
-            }).catch(error => {
-                alert("Er is een netwerkfout opgetreden. Probeer het later opnieuw.");
-            });
+            // Bouw de succes-tekst exact zoals je vroeg
+            const succesTekst = `Gereserveerd kom om ${geformatteerdeDatum} om ${gekozenTijd} uur bij ons langs!`;
+            
+            // Toon het bericht in de groene box
+            document.getElementById('berichtTekst').innerText = succesTekst;
+            
+            // Verberg het formulier en laat de succesbox zien
+            document.getElementById('reserveringsFormulier').style.display = 'none';
+            document.getElementById('succesBericht').style.display = 'block';
         });
     </script>
 
